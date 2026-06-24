@@ -183,7 +183,10 @@ def admin():
     if 'admin' not in session:
         return redirect('/admin-login')
 
-    response = supabase.table("feedback").select("*").execute()
+    response = supabase.table("feedback") \
+    .select("*") \
+    .order("id", desc=False) \
+    .execute()
     data = response.data
 
     results = {}
