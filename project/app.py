@@ -111,14 +111,17 @@ def my_feedback():
     if 'student_id' not in session:
         return redirect('/')
 
-    response = supabase.table("feedback") \
-        .select("rating,comment") \
-        .eq("receiver_id", session['student_id']) \
-        .execute()
+    response = supabase.table("feedback").select("*").execute()
 
-    feedbacks = response.data
+    all_feedback = response.data
 
-    return render_template('my_feedback.html', feedbacks=feedbacks)
+    my_feedbacks = []
+
+    for f in all_feedback:
+        if f['receiver_id'] == session['student_id']:
+            my_feedbacks.append(f)
+
+    return render_template('my_feedback.html', feedbacks=my_feedbacks)
 
 
 # ---------------- CHANGE PASSWORD ----------------

@@ -19,8 +19,8 @@
 {% for feedback in feedbacks %}
 
 <tr>
-    <td>{{ feedback[0] }}</td>
-    <td>{{ feedback[1] }}</td>
+    <td>{{ feedback.rating }}</td>
+    <td>{{ feedback.comment }}</td>
 </tr>
 
 {% endfor %}
