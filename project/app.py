@@ -184,9 +184,10 @@ def admin():
         return redirect('/admin-login')
 
     response = supabase.table("feedback") \
-    .select("*") \
-    .order("id", desc=False) \
-    .execute()
+        .select("*") \
+        .order("id", desc=False) \
+        .execute()
+
     data = response.data
 
     results = {}
@@ -208,7 +209,6 @@ def admin():
         ))
 
     return render_template('admin.html', results=final_results)
-
 
 # ---------------- ADMIN VIEW ----------------
 @app.route('/admin-view/<student_id>')
