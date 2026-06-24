@@ -22,16 +22,23 @@ def check():
     student_id = request.form['student_id']
     password = request.form['password']
 
+    print("Entered Student ID:", student_id)
+    print("Entered Password:", password)
+
     response = supabase.table("students") \
         .select("*") \
-        .eq("student_id", student_id) \
-        .eq("password", password) \
         .execute()
 
-    user = response.data
+    print("All Students:", response.data)
+
+    user = None
+
+    for row in response.data:
+        if str(row['student_id']) == str(student_id) and str(row['password']) == str(password):
+            user = row
+            break
 
     if user:
-        user = user[0]
         session['student_id'] = user['student_id']
         session['name'] = user['name']
         return redirect('/dashboard')
