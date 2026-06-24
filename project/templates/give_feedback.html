@@ -14,10 +14,10 @@
     <select name="receiver_id">
 
         {% for student in students %}
-        <option value="{{ student[0] }}">
-            {{ student[0] }} - {{ student[1] }}
-        </option>
-        {% endfor %}
+<option value="{{ student['student_id'] }}">
+    {{ student['student_id'] }} - {{ student['name'] }}
+</option>
+{% endfor %}
 
     </select>
 
